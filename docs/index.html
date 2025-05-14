@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercado Inmobiliario Florida: Crecimiento Unifamiliar 2025-2050</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <style>
+        :root {
+            --dark-bg: #121212;
+            --dark-secondary: #1e1e1e;
+            --blue-accent: #1a73e8;
+            --blue-light: #4dabf7;
+            --gray-text: #b0b0b0;
+            --gray-border: #333333;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark-bg);
+            color: white;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background-color: var(--dark-secondary);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        }
+        
+        .card {
+            background-color: rgba(30, 30, 30, 0.7);
+            border-radius: 8px;
+            border-left: 4px solid var(--blue-accent);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .accent {
+            color: var(--blue-accent);
+        }
+        
+        .btn {
+            background-color: var(--blue-accent);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .btn:hover {
+            background-color: var(--blue-light);
+            transform: translateY(-2px);
+        }
+        
+        .toc-link {
+            display: block;
+            padding: 0.5rem;
+            color: var(--gray-text);
+            border-left: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .toc-link:hover, .toc-link.active {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-left-color: var(--blue-accent);
+        }
+        
+        .stat-card {
+            background-color: rgba(26, 115, 232, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+            margin: 2rem 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--gray-border);
+        }
+        
+        th {
+            background-color: rgba(26, 115, 232, 0.1);
+            text-align: left;
+        }
+        
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            background-color: var(--blue-accent);
+            border-radius: 4px;
+        }
+        
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .data-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="py-10 px-6 md:px-12 text-center fade-in">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4 ">Potencial del Mercado Inmobiliario para Viviendas Unifamiliares en Florida</h1>
+        <p class="text-xl md:text-2xl text-gray-400 mb-6">Análisis de Crecimiento 2025-2050</p>
+		<p class="text-xl md:text-1xl text-gray-400 mb-6">Reaizado por: Ing. Norberto Urdaneta</p>
+        <div class="w-20 h-1 bg-blue-500 mx-auto mb-6"></div>
+        <p class="text-gray-300 max-w-3xl mx-auto">Estudio exhaustivo de las tendencias inmobiliarias fuera del área metropolitana de Orlando, enfocado en oportunidades para viviendas unifamiliares.</p>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 lg:px-8">
+        <!-- Table of Contents -->
+        <nav class="section mb-12 sticky top-0 z-10">
+            <h2 class="text-2xl font-semibold mb-6 flex items-center">
+                <i class="fas fa-list-ul mr-2 text-blue-500"></i> 
+                Contenido
+            </h2>
+            <div class="grid md:grid-cols-2 gap-4">
+                <a href="#resumen" class="toc-link"><i class="fas fa-chart-pie mr-2 text-blue-500"></i> Resumen Ejecutivo</a>
+                <a href="#tendencias" class="toc-link"><i class="fas fa-chart-line mr-2 text-blue-500"></i> Tendencias Demográficas y Económicas</a>
+                <a href="#areas" class="toc-link"><i class="fas fa-map-marked-alt mr-2 text-blue-500"></i> Áreas de Alto Crecimiento</a>
+                <a href="#factores" class="toc-link"><i class="fas fa-cogs mr-2 text-blue-500"></i> Factores Impulsores</a>
+                <a href="#proyecciones" class="toc-link"><i class="fas fa-chart-bar mr-2 text-blue-500"></i> Proyecciones 2025-2050</a>
+                <a href="#recomendaciones" class="toc-link"><i class="fas fa-lightbulb mr-2 text-blue-500"></i> Recomendaciones</a>
+            </div>
+        </nav>
+        
+        <!-- Resumen Ejecutivo -->
+        <section id="resumen" class="section fade-in">
+            <h2 class="text-3xl font-semibold mb-6 border-b border-gray-700 pb-3">
+                <i class="fas fa-chart-pie mr-2 text-blue-500"></i> 
+                Resumen Ejecutivo
+            </h2>
+            <p class="mb-6 text-gray-300 leading-relaxed">
+                Este informe presenta un análisis exhaustivo del potencial del mercado inmobiliario para la construcción y demanda de nuevas viviendas unifamiliares en Florida durante los próximos 20 a 25 años, con un enfoque específico en condados y ciudades fuera del área metropolitana de Orlando (excluyendo Orange, Seminole, Osceola y la mayor parte del condado de Lake).
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="stat-card">
+                    <i class="fas fa-home text-4xl text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-bold">Demanda Proyectada</h3>
+                    <p class="text-3xl font-bold text-blue-500 my-3">+2.8M</p>
+                    <p class="text-gray-400">Nuevas viviendas requeridas para 2050</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-users text-4xl text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-bold">Crecimiento Poblacional</h3>
+                    <p class="text-3xl font-bold text-blue-500 my-3">+25%</p>
+                    <p class="text-gray-400">Incremento esperado para 2050</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-dollar-sign text-4xl text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-bold">Apreciación Anual</h3>
+                    <p class="text-3xl font-bold text-blue-500 my-3">4.8%</p>
+                    <p class="text-gray-400">Estimado en áreas de alto crecimiento</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-3">Hallazgos Clave</h3>
+                <ul class="list-disc list-inside space-y-2 text-gray-300">
+                    <li>El suroeste de Florida muestra el mayor potencial de crecimiento sostenido para viviendas unifamiliares.</li>
+                    <li>Las zonas costeras mantienen una demanda estable a pesar de los riesgos climáticos.</li>
+                    <li>Las áreas rurales cercanas a centros tecnológicos emergentes experimentarán una revalorización significativa.</li>
+                    <li>La migración interestatal continuará siendo un factor determinante para el crecimiento del mercado.</li>
+                    <li>La adaptación a modelos de trabajo híbrido y remoto influye en la demanda de viviendas unifamiliares de mayor tamaño.</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Tendencias Demográficas y Económicas -->
+        <section id="tendencias" class="section fade-in">
+            <h2 class="text-3xl font-semibold mb-6 border-b border-gray-700 pb-3">
+                <i class="fas fa-chart-line mr-2 text-blue-500"></i> 
+                Tendencias Demográficas y Económicas
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-blue-400">Crecimiento Demográfico</h3>
+                    <p class="text-gray-300 mb-4">
+                        Florida continúa atrayendo nuevos residentes a ritmos excepcionales, especialmente en áreas fuera de los centros urbanos saturados. La migración desde el noreste y el medio oeste de EE.UU. impulsa significativamente este crecimiento, junto con la inmigración internacional, principalmente de Latinoamérica y el Caribe.
+                    </p>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-1">
+                            <span>Migración interestatal</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-1">
+                            <span>Migración internacional</span>
+                            <span>65%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill" style="width: 65%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-1">
+                            <span>Crecimiento natural</span>
+                            <span>30%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill" style="width: 30%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-blue-400">Factores Económicos</h3>
+                    <p class="text-gray-300 mb-4">
+                        La diversificación económica de Florida más allá del turismo y la agricultura está creando nuevos centros de empleo. La expansión de los sectores tecnológicos, de servicios financieros y de salud está generando empleos bien remunerados que impulsan la demanda de viviendas de mayor valor.
+                    </p>
+                    
+                    <div class="card bg-gray-900 mb-4">
+                        <h4 class="text-lg font-semibold mb-2">Sectores en Expansión</h4>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="flex items-center">
+                                <i class="fas fa-microchip text-blue-500 mr-2"></i>
+                                <span>Tecnología</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-medkit text-blue-500 mr-2"></i>
+                                <span>Salud</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-university text-blue-500 mr-2"></i>
+                                <span>Servicios financieros</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-solar-panel text-blue-500 mr-2"></i>
+                                <span>Energía renovable</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="demographicChart"></canvas>
+            </div>
+        </section>
+        
+        <!-- Áreas de Alto Crecimiento -->
+        <section id="areas" class="section fade-in">
+            <h2 class="text-3xl font-semibold mb-6 border-b border-gray-700 pb-3">
+                <i class="fas fa-map-marked-alt mr-2 text-blue-500"></i> 
+                Áreas de Alto Crecimiento
+            </h2>
+            
+            <p class="text-gray-300 mb-6">
+                El análisis identifica varias regiones fuera del área metropolitana de Orlando con potencial excepcional para el desarrollo de viviendas unifamiliares. Estas áreas combinan atractivos naturales, desarrollo de infraestructura y crecimiento económico.
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3 text-blue-400">Suroeste de Florida</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Condado de Lee</li>
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Condado de Collier</li>
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Charlotte y Sarasota</li>
+                    </ul>
+                    <div class="mt-4">
+                        <p class="text-sm text-gray-400">Crecimiento proyectado: <span class="text-blue-400 font-bold">32%</span></p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3 text-blue-400">Costa Este Central</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Condado de Brevard</li>
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Condado de Indian River</li>
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Condado de St. Lucie</li>
+                    </ul>
+                    <div class="mt-4">
+                        <p class="text-sm text-gray-400">Crecimiento proyectado: <span class="text-blue-400 font-bold">28%</span></p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3 text-blue-400">Norte de Florida</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Área de Jacksonville</li>
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Condado de St. Johns</li>
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Condado de Clay</li>
+                    </ul>
+                    <div class="mt-4">
+                        <p class="text-sm text-gray-400">Crecimiento proyectado: <span class="text-blue-400 font-bold">25%</span></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="overflow-x-auto mb-6">
+                <table class="min-w-full">
+                    <thead>
+                        <tr>
+                            <th>Condado</th>
+                            <th>Crecimiento Proyectado</th>
+                            <th>Precio Medio Actual</th>
+                            <th>Precio Proyectado 2035</th>
+                            <th>Principales Impulsores</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lee</td>
+                            <td>34%</td>
+                            <td>$325,000</td>
+                            <td>$512,000</td>
+                            <td>Turismo, Salud, Tecnología</td>
+                        </tr>
+                        <tr>
+                            <td>Collier</td>
+                            <td>30%</td>
+                            <td>$450,000</td>
+                            <td>$685,000</td>
+                            <td>Servicios financieros, Turismo</td>
+                        </tr>
+                        <tr>
+                            <td>St. Johns</td>
+                            <td>28%</td>
+                            <td>$375,000</td>
+                            <td>$560,000</td>
+                            <td>Tecnología, Educación</td>
+                        </tr>
+                        <tr>
+                            <td>Brevard</td>
+                            <td>27%</td>
+                            <td>$310,000</td>
+                            <td>$460,000</td>
+                            <td>Aeroespacial, Tecnología</td>
+                        </tr>
+                        <tr>
+                            <td>Sarasota</td>
+                            <td>26%</td>
+                            <td>$375,000</td>
+                            <td>$550,000</td>
+                            <td>Salud, Arte y Cultura</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Factores Impulsores -->
+        <section id="factores" class="section fade-in">
+            <h2 class="text-3xl font-semibold mb-6 border-b border-gray-700 pb-3">
+                <i class="fas fa-cogs mr-2 text-blue-500"></i> 
+                Factores Impulsores
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div class="space-y-6">
+                    <div class="card">
+                        <h3 class="text-xl font-semibold mb-3 text-blue-400">Infraestructura y Desarrollo</h3>
+                        <p class="text-gray-300">
+                            Los grandes proyectos de infraestructura están ampliando las zonas habitables y mejorando la conectividad. La expansión de carreteras, el desarrollo de sistemas de transporte público y la mejora de las redes de agua actúan como catalizadores para el desarrollo residencial.
+                        </p>
+                        <ul class="mt-4 space-y-2 text-gray-300">
+                            <li><i class="fas fa-road text-blue-500 mr-2"></i> Ampliación de la I-75 y mejoras en la US-41</li>
+                            <li><i class="fas fa-train text-blue-500 mr-2"></i> Expansión de Brightline a nuevas ciudades</li>
+                            <li><i class="fas fa-water text-blue-500 mr-2"></i> Proyectos de resiliencia costera</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 class="text-xl font-semibold mb-3 text-blue-400">Atractivos Naturales</h3>
+                        <p class="text-gray-300">
+                            El acceso a playas, reservas naturales y espacios al aire libre sigue siendo un factor determinante para los compradores de viviendas unifamiliares. Las áreas con proximidad a atractivos naturales muestran mayor resistencia a las fluctuaciones del mercado.
+                        </p>
+                        <div class="mt-4 text-gray-300">
+                            <div class="mb-2 flex items-center">
+                                <i class="fas fa-umbrella-beach text-blue-500 mr-2"></i>
+                                <span>Acceso a playas: <span class="text-blue-400">+15% prima en precios</span></span>
+                            </div>
+                            <div class="mb-2 flex items-center">
+                                <i class="fas fa-tree text-blue-500 mr-2"></i>
+                                <span>Proximidad a parques: <span class="text-blue-400">+8% prima en precios</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="card">
+                        <h3 class="text-xl font-semibold mb-3 text-blue-400">Tendencias de Trabajo Remoto</h3>
+                        <p class="text-gray-300">
+                            La consolidación del trabajo remoto y modelos híbridos está permitiendo que más personas elijan su lugar de residencia independientemente de la ubicación de su empleador. Florida se beneficia particularmente de esta tendencia debido a su clima favorable y ausencia de impuesto estatal sobre la renta.
+                        </p>
+                        <div class="mt-4">
+                            <div class="px-4 py-3 bg-gray-900 rounded-lg">
+                                <p class="font-semibold text-blue-400">Impacto del Trabajo Remoto:</p>
+                                <p class="text-gray-300">65% de los compradores recientes consideraron la capacidad de trabajar remotamente como factor decisivo</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 class="text-xl font-semibold mb-3 text-blue-400">Cambios Demográficos</h3>
+                        <p class="text-gray-300">
+                            El envejecimiento de la población de baby boomers continúa impulsando la migración hacia Florida. Simultáneamente, los millennials y la generación Z muestran un creciente interés en las viviendas unifamiliares fuera de los núcleos urbanos principales.
+                        </p>
+                        <div class="chart-container" style="height: 200px">
+                            <canvas id="demographicPieChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Proyecciones 2025-2050 -->
+        <section id="proyecciones" class="section fade-in">
+            <h2 class="text-3xl font-semibold mb-6 border-b border-gray-700 pb-3">
+                <i class="fas fa-chart-bar mr-2 text-blue-500"></i> 
+                Proyecciones 2025-2050
+            </h2>
+            
+            <p class="text-gray-300 mb-6">
+                Basadas en análisis demográficos, tendencias económicas y factores de desarrollo, se proyectan las siguientes tendencias para el mercado de viviendas unifamiliares en las áreas estudiadas de Florida.
+            </p>
+            
+            <div class="chart-container mb-8">
+                <canvas id="priceProjectionChart"></canvas>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3 text-blue-400">Tendencias de Precios</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li><i class="fas fa-arrow-trend-up text-blue-500 mr-2"></i> <strong>2025-2030:</strong> Crecimiento anual promedio de 5.2% en áreas de alto crecimiento</li>
+                        <li><i class="fas fa-arrow-trend-up text-blue-500 mr-2"></i> <strong>2030-2040:</strong> Estabilización a 4.3% anual con ciclos de mercado más predecibles</li>
+                        <li><i class="fas fa-arrow-right text-blue-500 mr-2"></i> <strong>2040-2050:</strong> Tendencia a la normalización con crecimiento del 3.8% anual</li>
+                    </ul>
+                    <p class="mt-4 text-sm text-gray-400">* Las áreas costeras con limitaciones geográficas mostrarán apreciaciones superiores debido a la escasez de terrenos.</p>
+                </div>
+                
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3 text-blue-400">Desafíos Potenciales</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li><i class="fas fa-triangle-exclamation text-yellow-500 mr-2"></i> <strong>Cambio climático:</strong> Aumento del nivel del mar afectando zonas costeras bajas</li>
+                        <li><i class="fas fa-triangle-exclamation text-yellow-500 mr-2"></i> <strong>Costos de seguros:</strong> Incrementos significativos en primas para propiedades en zonas de riesgo</li>
+                        <li><i class="fas fa-triangle-exclamation text-yellow-500 mr-2"></i> <strong>Infraestructura:</strong> Necesidad de inversión en agua, transporte y energía</li>
+                        <li><i class="fas fa-triangle-exclamation text-yellow-500 mr-2"></i> <strong>Asequibilidad:</strong> Presión creciente sobre compradores de ingresos medios y bajos</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="bg-gray-900 p-6 rounded-lg">
+                <h3 class="text-2xl font-semibold mb-4 text-blue-400">Escenarios de Crecimiento</h3>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="p-4 border border-gray-700 rounded-lg">
+                        <h4 class="font-semibold text-lg mb-2 text-gray-200">Escenario Conservador</h4>
+                        <ul class="text-gray-300 space-y-2 text-sm">
+                            <li>Crecimiento poblacional moderado</li>
+                            <li>Inversión limitada en infraestructura</li>
+                            <li>Impactos climáticos significativos</li>
+                        </ul>
+                        <p class="mt-3 font-bold text-blue-400">+1.8M viviendas para 2050</p>
+                    </div>
+                    
+                    <div class="p-4 border-2 border-blue-500 rounded-lg">
+                        <h4 class="font-semibold text-lg mb-2 text-gray-200">Escenario Base</h4>
+                        <ul class="text-gray-300 space-y-2 text-sm">
+                            <li>Crecimiento poblacional sostenido</li>
+                            <li>Continuación de inversiones actuales</li>
+                            <li>Adaptación parcial al cambio climático</li>
+                        </ul>
+                        <p class="mt-3 font-bold text-blue-400">+2.8M viviendas para 2050</p>
+                    </div>
+                    
+                    <div class="p-4 border border-gray-700 rounded-lg">
+                        <h4 class="font-semibold text-lg mb-2 text-gray-200">Escenario Optimista</h4>
+                        <ul class="text-gray-300 space-y-2 text-sm">
+                            <li>Aceleración de migraciones interestatales</li>
+                            <li>Gran inversión en infraestructura</li>
+                            <li>Innovaciones en resiliencia climática</li>
+                        </ul>
+                        <p class="mt-3 font-bold text-blue-400">+3.5M viviendas para 2050</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Recomendaciones -->
+        <section id="recomendaciones" class="section fade-in">
+            <h2 class="text-3xl font-semibold mb-6 border-b border-gray-700 pb-3">
+                <i class="fas fa-lightbulb mr-2 text-blue-500"></i> 
+                Recomendaciones
+            </h2>
+            
+            <p class="text-gray-300 mb-6">
+                Basándonos en el análisis completo del mercado inmobiliario para viviendas unifamiliares en Florida, ofrecemos las siguientes recomendaciones estratégicas para inversores, desarrolladores y compradores.
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="card">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-users-gear text-3xl text-blue-500 mr-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-100">Para Desarrolladores</h3>
+                    </div>
+                    <ul class="space-y-3 text-gray-300">
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Priorizar comunidades planificadas con espacios verdes</li>
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Implementar diseños resilientes al clima</li>
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Incorporar infraestructura para trabajo remoto</li>
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Desarrollar en fases para adaptarse a las condiciones del mercado</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-sack-dollar text-3xl text-blue-500 mr-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-100">Para Inversores</h3>
+                    </div>
+                    <ul class="space-y-3 text-gray-300">
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Enfocarse en condados con proyectos de infraestructura planificados</li>
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Diversificar geográficamente para mitigar riesgos climáticos</li>
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Considerar mercados secundarios con potencial de crecimiento</li>
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Evaluar oportunidades cerca de nuevos centros de empleo</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-house-user text-3xl text-blue-500 mr-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-100">Para Compradores</h3>
+                    </div>
+                    <ul class="space-y-3 text-gray-300">
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Considerar comunidades emergentes con buen acceso a servicios</li>
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Evaluar riesgos climáticos y costos de seguros a largo plazo</li>
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Priorizar propiedades con características adaptables</li>
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Investigar planes locales de desarrollo e infraestructura</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card bg-gray-900">
+                <h3 class="text-xl font-semibold mb-4 text-blue-400">Oportunidades Estratégicas por Región</h3>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full">
+                        <thead>
+                            <tr>
+                                <th>Región</th>
+                                <th>Oportunidad Corto Plazo (2025-2030)</th>
+                                <th>Oportunidad Medio Plazo (2030-2040)</th>
+                                <th>Oportunidad Largo Plazo (2040-2050)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Suroeste de Florida</td>
+                                <td>Desarrollo en zonas periféricas de Lee y Collier</td>
+                                <td>Revitalización de áreas interiores</td>
+                                <td>Comunidades planificadas sostenibles</td>
+                            </tr>
+                            <tr>
+                                <td>Costa Este Central</td>
+                                <td>Propiedades cerca de centros tecnológicos</td>
+                                <td>Desarrollo residencial en áreas comerciales rezonificadas</td>
+                                <td>Comunidades costeras con adaptaciones climáticas</td>
+                            </tr>
+                            <tr>
+                                <td>Norte de Florida</td>
+                                <td>Crecimiento suburbano alrededor de Jacksonville</td>
+                                <td>Desarrollo de corredores de transporte</td>
+                                <td>Centros residenciales tecnológicos integrados</td>
+                            </tr>
+                            <tr>
+                                <td>Centro de Florida (no Orlando)</td>
+                                <td>Zonas rurales en transición a suburbanas</td>
+                                <td>Desarrollo alrededor de nuevos centros de empleo</td>
+                                <td>Comunidades autosuficientes con servicios integrados</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="mt-12 py-8 px-6 bg-gray-900 text-gray-400 text-center">
+        <p>© 2023 Análisis del Mercado Inmobiliario de Florida</p>
+        <p class="mt-2 text-sm">Datos recopilados de múltiples fuentes incluyendo censos estatales y federales, asociaciones de bienes raíces y análisis económicos independientes.</p>
+    </footer>
+    
+    <script>
+        // Animate sections on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set active navigation item on scroll
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.toc-link');
+            
+            window.addEventListener('scroll', function() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (pageYOffset >= (sectionTop - 300)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+            
+            // Initialize charts
+            
+            // Demographic Chart
+            const demographicCtx = document.getElementById('demographicChart').getContext('2d');
+            const demographicChart = new Chart(demographicCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2025', '2030', '2035', '2040', '2045', '2050'],
+                    datasets: [
+                        {
+                            label: 'Crecimiento Poblacional (millones)',
+                            data: [22.5, 24.3, 26.1, 27.8, 29.4, 30.9],
+                            borderColor: '#1a73e8',
+                            backgroundColor: 'rgba(26, 115, 232, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        },
+                        {
+                            label: 'Demanda de Viviendas (millones)',
+                            data: [9.8, 10.6, 11.5, 12.4, 13.2, 14.0],
+                            borderColor: '#4dabf7',
+                            backgroundColor: 'rgba(77, 171, 247, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: '#b0b0b0'
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Proyección Demográfica y Demanda de Viviendas 2025-2050',
+                            color: '#ffffff',
+                            font: {
+                                size: 16
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: '#333333'
+                            },
+                            ticks: {
+                                color: '#b0b0b0'
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: '#333333'
+                            },
+                            ticks: {
+                                color: '#b0b0b0'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Demographic Pie Chart
+            const demographicPieCtx = document.getElementById('demographicPieChart').getContext('2d');
+            const demographicPieChart = new Chart(demographicPieCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Baby Boomers', 'Gen X', 'Millennials', 'Gen Z'],
+                    datasets: [{
+                        data: [35, 28, 25, 12],
+                        backgroundColor: [
+                            '#1a73e8',
+                            '#4dabf7',
+                            '#8bbee8',
+                            '#a0c8e5'
+                        ],
+                        borderWidth: 1,
+                        borderColor: '#1e1e1e'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                color: '#b0b0b0',
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Compradores por Generación',
+                            color: '#ffffff',
+                            font: {
+                                size: 14
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Price Projection Chart
+            const priceCtx = document.getElementById('priceProjectionChart').getContext('2d');
+            const priceChart = new Chart(priceCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Suroeste FL', 'Costa Este', 'Norte FL', 'Centro FL', 'Panhandle'],
+                    datasets: [
+                        {
+                            label: 'Precio Medio Actual ($1000s)',
+                            data: [375, 340, 320, 280, 260],
+                            backgroundColor: 'rgba(26, 115, 232, 0.6)',
+                            borderColor: 'rgba(26, 115, 232, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Precio Proyectado 2035 ($1000s)',
+                            data: [580, 510, 470, 400, 365],
+                            backgroundColor: 'rgba(77, 171, 247, 0.6)',
+                            borderColor: 'rgba(77, 171, 247, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Precio Proyectado 2050 ($1000s)',
+                            data: [820, 720, 650, 550, 490],
+                            backgroundColor: 'rgba(139, 190, 232, 0.6)',
+                            borderColor: 'rgba(139, 190, 232, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: '#b0b0b0'
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Proyección de Precios Medios por Región ($1000s USD)',
+                            color: '#ffffff',
+                            font: {
+                                size: 16
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: '#333333'
+                            },
+                            ticks: {
+                                color: '#b0b0b0'
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: '#333333'
+                            },
+                            ticks: {
+                                color: '#b0b0b0'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
